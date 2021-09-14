@@ -1,0 +1,203 @@
+<html>
+	<header>
+		<title>TicTacToe</title>
+
+		<style type="text/css">
+		<!--td {border: 5px solid black;}-->
+			  
+		h1 { color: #353577; }
+		<!--p { text-decoration: underline; }-->
+		
+		.box1 {display: flex;
+			   align-items: center;
+			   justify-content: center;
+			   flex-wrap: nowrap; 
+			   background-color: DodgerBlue; 
+			   border: 1px solid black; 
+			   width:300px;
+			   margin: 3 auto;}
+			   
+		.box2 { border: 2px solid pink; 
+				font-size: 30px;}
+				
+		.box3 { background-color: #f1f1f1;
+				border: 2px solid red; 
+				width:90px; 
+				height: 90px;
+				margin: 3 auto;}
+		}
+		</style>
+		
+<script>
+	
+//var test="hello";
+//alert(test);
+console.log('application started.');
+var num = 0;
+console.log(num);
+var lastClicked = "";
+
+var player1 = [];
+var player2 = [];
+
+console.log('--------------------------------');
+var testStr = '3469';
+var t = testStr.indexOf('369');
+console.log(t);
+console.log('--------------------------------');
+	
+//SDLC - software development life cycle
+//requirement gathering -> development -> testing  -> deployment
+//when a box is clicked
+//check if the box is empty - done
+//if the box is not empty, print 'choose another box' , do not increment numOFClicked 
+// else, fill the box - done
+function updateText(){
+	
+	var id = event.srcElement.id;
+	lastClicked = id;
+	var contentOfClickedEle = document.getElementById(id).innerHTML;
+	contentOfClickedEle = contentOfClickedEle.trim();
+	//<div></div>
+	console.log('reading content of the clicked area');
+	console.log('#'+contentOfClickedEle+'#');
+	if(contentOfClickedEle != ''){
+		alert('The box was selected by another player. Please choose a different box.');
+	}
+	else{
+		num = num+1;
+		if (num %2 == 0){
+			document.getElementById(id).style.backgroundColor = 'yellow'; 
+			document.getElementById(id).innerHTML = "x";
+			player2.push(id);
+		} else {
+			document.getElementById(id).style.backgroundColor = 'blue'; 
+			document.getElementById(id).innerHTML = "o";
+			player1.push(id);
+		}
+		console.log(id + ' clicked');
+		console.log(num);
+		
+		checkWinner(id);
+	}
+	
+	
+
+}
+//123, 456, 789, 147, 258, 369, 159, 357
+//function 
+//input - user selection e.g. 3569
+//check user selection  against possible winning comb
+//use for loop to check if 3569 contains all of one of winning comb
+//winningComb = [123,456,789,147,258,369,159,357];
+//if you are comparing 123 against 3569
+//in for loop check 123.indexOf(3) > 0
+//in for loop check 123.indexOf(6) > 0
+function playerWins(playerSelection){
+	if(playerSelection == "123" || playerSelection == "456" || 
+	playerSelection == "789" || playerSelection == "147" ||
+	playerSelection == "258" || playerSelection == "369" || 
+	playerSelection == "159" || playerSelection == "357"){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+
+
+function checkWinner(id){
+	player1.sort();
+	player2.sort();
+	var player1Selection = "";
+	var player2Selection = "";
+	
+	var player1Win = false;
+	var player2Win = false;
+	for (let i = 0; i < player1.length; i++) {
+	  player1Selection += player1[i];
+	}
+	for (let i = 0; i < player2.length; i++) {
+	  player2Selection += player2[i];
+	}
+	
+	if(playerWins(player1Selection)){
+		player1Win = true;
+	}
+	
+	if(playerWins(player2Selection)){
+		player2Win = true;
+	}
+
+	
+	console.log(player1);
+	console.log(player2);
+	if (num %2 == 0 && player2Win == true){
+		console.log("Player2 wins");
+		//clearGame();
+		
+	} else if(num %2 == 1 && player1Win == true) {
+		console.log("Player1 wins");
+		//clearGame();
+	}
+	
+}
+
+function clearGame(){
+	for(let i=1; i<10; i++){
+		document.getElementById(i).style.backgroundColor = 'white'; 
+		document.getElementById(i).innerHTML = "";
+	}
+	resetVariables();
+}
+
+function resetVariables(){
+	player1 = [];
+	player2 = [];
+	number = 0;
+	<!-- var player1Length = player1.length; -->
+	<!-- for(let i=0; i< player1Length; i++){ -->	
+		<!-- player1.pop(); -->
+	<!-- } -->
+}
+function resetBtnClicked() {
+	clearGame();
+}
+
+
+</script>
+	
+	
+	</header>
+	
+	<body style="background-color:#dddddd">
+		<div align="center">
+		<h1>Tic Tac Toe</h1>
+		</div>
+		
+		
+		<div class="box1" align="center">
+			<div class="box2" >
+				<div class="box3" id="1" onclick="updateText()">  </div>
+				<div class="box3" id="2" onclick="updateText()">  </div>
+				<div class="box3" id="3" onclick="updateText()">  </div>
+			</div>
+			
+			<div class="box2">
+				<div class="box3" id="4" onclick="updateText()">  </div>
+				<div class="box3" id="5" onclick="updateText()">  </div>
+				<div class="box3" id="6" onclick="updateText()">  </div>
+			</div>
+			
+			<div class="box2" >
+				<div class="box3" id="7" onclick="updateText()">  </div>
+				<div class="box3" id="8" onclick="updateText()">  </div>
+				<div class="box3" id="9" onclick="updateText()">  </div>
+			</div>
+		</div>
+		
+		<button onclick="resetBtnClicked()", id="reset">RESET</button>
+	</body>
+
+</html>
