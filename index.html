@@ -12,16 +12,16 @@
 			   align-items: center;
 			   justify-content: center;
 			   flex-wrap: nowrap; 
-			   background-color: DodgerBlue; 
+			   background-color: green; 
 			   border: 1px solid black; 
 			   width:300px;
 			   margin: 3 auto;}
 			   
-		.box2 { border: 2px solid pink; 
+		.box2 { border: 2px solid yellow; 
 				font-size: 30px;}
 				
 		.box3 { background-color: #f1f1f1;
-				border: 2px solid red; 
+				border: 2px solid black; 
 				width:90px; 
 				height: 90px;
 				margin: 3 auto;}
@@ -67,11 +67,11 @@ function updateText(){
 	else{
 		num = num+1;
 		if (num %2 == 0){
-			document.getElementById(id).style.backgroundColor = 'yellow'; 
+			document.getElementById(id).style.backgroundColor = 'DodgerBlue'; 
 			document.getElementById(id).innerHTML = "x";
 			player2.push(id);
 		} else {
-			document.getElementById(id).style.backgroundColor = 'blue'; 
+			document.getElementById(id).style.backgroundColor = 'Tomato'; 
 			document.getElementById(id).innerHTML = "o";
 			player1.push(id);
 		}
